@@ -9,7 +9,7 @@ const config = {
 const me = 'limitless-ridge-71279'
 const list = [
   me,
-  'peaceful-earth-85248'
+  'dry-thicket-72441'
 ]
 
 list.forEach(name => {

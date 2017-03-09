@@ -18,14 +18,11 @@ list.forEach(name => {
 
 // use to bind port in heroku
 // otherwise, app will be terminated within 60s
-import { createServer } from 'http';
+var http = require('http');
+var fs = require('fs');
+var index = fs.readFileSync('index.html');
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const port = process.env.PORT || 3000;
-
-createServer(async (req, res) => {
-  await delay(500);
-  console.log('Request!');
-  res.end('hi!');
-})
-.listen(port, () => console.log(`Server running on port ${port}`));
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end(index);
+}).listen(process.env.PORT || 3000);

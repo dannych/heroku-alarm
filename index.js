@@ -15,3 +15,17 @@ const list = [
 list.forEach(name => {
   awake(`http://${name}.herokuapp.com/`, config, console.log);
 })
+
+// use to bind port in heroku
+// otherwise, app will be terminated within 60s
+import { createServer } from 'http';
+
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const port = process.env.PORT || 3000;
+
+createServer(async (req, res) => {
+  await delay(500);
+  console.log('Request!');
+  res.end('hi!');
+})
+.listen(port, () => console.log(`Server running on port ${port}`));
